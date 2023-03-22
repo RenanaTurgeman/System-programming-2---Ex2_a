@@ -17,6 +17,8 @@ public:
     Player(std::string mname){
         name = mname;
     }
+    std::string to_string();
+    int stacksize(); //prints the amount of cards left.
 };
 
 }//namescap
