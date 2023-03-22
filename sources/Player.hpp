@@ -1,7 +1,9 @@
 #pragma once
 #include <iostream>
 #include <string>
-using namespace ariel;
+
+namespace ariel
+{
 
 
 class Player
@@ -16,3 +18,5 @@ public:
         name = mname;
     }
 };
+
+}//namescap

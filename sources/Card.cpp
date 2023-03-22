@@ -1,1 +1,3 @@
-using namespace ariel;
+namespace ariel{
+
+}

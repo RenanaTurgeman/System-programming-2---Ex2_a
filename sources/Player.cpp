@@ -1,8 +1,10 @@
 #include "Player.hpp"
 using namespace std;
-using namespace ariel;
 
+namespace ariel{
 
 int Player::stacksize(){
 
 }
+
+}//namescap
