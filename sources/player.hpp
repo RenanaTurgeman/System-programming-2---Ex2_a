@@ -19,6 +19,7 @@ public:
     }
     std::string to_string();
     int stacksize(); //prints the amount of cards left.
+    int cardesTaken(); //prints the amount of cards this player has won.
 };
 
 }//namescap
