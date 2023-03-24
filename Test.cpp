@@ -30,3 +30,19 @@ TEST_CASE("Before starting to play"){
    CHECK(p1.cardesTaken()==0);
    CHECK(p2.cardesTaken()==0);
 }
+
+TEST_CASE("During the game"){
+   // Create two players with their names 
+   Player p1("Alice");
+   Player p2("Bob");
+
+   Game game(p1,p2);
+   for (int i=0;i<5;i++) {
+    game.playTurn();
+   }
+    
+   //serval checks that the number of the card is correct
+   CHECK((p1.stacksize() + p2.stacksize() ==52));
+   CHECK((p1.stacksize()+p2.cardesTaken()- p1.cardesTaken()==26));
+   CHECK((p2.stacksize()+p1.cardesTaken() -p2.cardesTaken()==26));
+}
