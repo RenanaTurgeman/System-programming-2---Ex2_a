@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include "player.hpp"
 
 namespace ariel{
     class Game
