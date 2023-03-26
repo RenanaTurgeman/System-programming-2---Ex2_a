@@ -35,11 +35,11 @@ TEST_CASE("During the game"){
    // Create two players with their names 
    Player p1("Alice");
    Player p2("Bob");
-   
+   Game game(p1,p2);
+
    //serval checks that the number of the card is correct
    CHECK((p1.stacksize() + p2.stacksize() ==52));
    
-   Game game(p1,p2);
    game.playTurn();
 
    CHECK((p1.stacksize()<26));
@@ -119,3 +119,4 @@ TEST_CASE("the sum of the cardes taken is 52 in the end"){
    CHECK(p1.cardesTaken() + p2.cardesTaken() == 52);
    CHECK(p1.stacksize() + p2.stacksize() == 0);
 }
+
