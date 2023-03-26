@@ -50,11 +50,11 @@ TEST_CASE("During the game"){
    CHECK(winner);
 
    for (int i=0;i<5;i++) {
-    game.playTurn();
+      game.playTurn();
+      CHECK((p1.stacksize()+p2.cardesTaken()==26));
+      CHECK((p2.stacksize()+p1.cardesTaken()==26));
    }
     
-   CHECK((p1.stacksize()+p2.cardesTaken()==26));
-   CHECK((p2.stacksize()+p1.cardesTaken()==26));
 }
 
 TEST_CASE("End the game- thw stack size need to be 0"){
