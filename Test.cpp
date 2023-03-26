@@ -21,6 +21,12 @@ TEST_CASE("Preparations for the game- each player have 26 cards"){
    CHECK(p1.stacksize()== 26);
 }
 
+TEST_CASE("Preparations for the game- player cant play with himself"){
+      Player p1("Alice");
+      Game game(p1,p1);//plays with himself
+      CHECK_THROWS(game.playTurn());
+}
+
 TEST_CASE("Before starting to play - cardes taken need to be 0"){
    // Create two players with their names 
    Player p1("Alice");
@@ -30,8 +36,16 @@ TEST_CASE("Before starting to play - cardes taken need to be 0"){
    CHECK(p1.cardesTaken()==0);
    CHECK(p2.cardesTaken()==0);
 }
+TEST_CASE("After one round the sum of the cards is 52"){
+   // Create two players with their names 
+    Player p1("Alice");
+    Player p2("Bob");
+    Game game(p1, p2);
+    game.playTurn();
+    CHECK((p1.stacksize() + p1.cardesTaken() + p2.stacksize() + p2.cardesTaken() == 52));
+}
 
-TEST_CASE("During the game"){
+TEST_CASE("During the game- check amount of cards"){
    // Create two players with their names 
    Player p1("Alice");
    Player p2("Bob");
@@ -46,18 +60,17 @@ TEST_CASE("During the game"){
    CHECK((p2.stacksize()<26));
    bool won1 = p1.cardesTaken()>=1;
    bool won2 = p2.cardesTaken()>=1;
-   bool winner =won1|| won2; //one of them one 
+   bool winner =won1|| won2; //one of them won 
    CHECK(winner);
 
    for (int i=0;i<5;i++) {
       game.playTurn();
-      CHECK((p1.stacksize()+p2.cardesTaken()==26));
-      CHECK((p2.stacksize()+p1.cardesTaken()==26));
+      CHECK((p1.stacksize()+p2.cardesTaken()+p2.stacksize()+p1.cardesTaken()==52));
    }
     
 }
 
-TEST_CASE("End the game- thw stack size need to be 0"){
+TEST_CASE("End the game- the stack size need to be 0"){
    // Create two players with their names 
    Player p1("Alice");
    Player p2("Bob");
@@ -66,12 +79,12 @@ TEST_CASE("End the game- thw stack size need to be 0"){
    game.playAll(); //playes the game untill the end
    CHECK((p1.stacksize() == 0));
    CHECK((p2.stacksize() ==0));
-   CHECK_THROWS(game.playTurn());
+   CHECK_THROWS(game.playTurn());//error need to be throws if we play after thr game is over
 }
 
 TEST_CASE("Finish game at most 26 turns"){
    //the game should finish after 26 turns at maxsimum
-    // Create two players with their names 
+   // Create two players with their names 
    Player p1("Alice");
    Player p2("Bob");
 
@@ -120,3 +133,11 @@ TEST_CASE("the sum of the cardes taken is 52 in the end"){
    CHECK(p1.stacksize() + p2.stacksize() == 0);
 }
 
+TEST_CASE("Winner can printed only in the end of the game"){
+   // Create two players with their names 
+   Player p1("Alice");
+   Player p2("Bob");
+
+   Game game(p1,p2);  
+   CHECK_THROWS(game.printWiner()); //here there is print of the winner before the game even start
+}
